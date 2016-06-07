@@ -9,13 +9,16 @@ See ./server -h for the details.
 HTTP API
 ========
 /api/get-proxy-conn: get a dynamic proxy address.
+
 POST data :
+```
 {
     "PID":"nsq-12",
     "RemoteAddr":"10.10.1.100:12345",
     "Protocol":"unix",
     "InitSendData":""
 }
+```
 Note: PID is used to separate the different client to the same service,
     basically, we can use the same pid for all clients. However, we can
     separate it to avoid some contention.
@@ -23,33 +26,41 @@ Note: PID is used to separate the different client to the same service,
     connect. (such as the auth or identify client.)
 
 /api/close-proxy-conn: close the remote immediately.
+
 POST data:
+```
 {
     "PID":"nsq-12",
     "RemoteAddr":"10.10.1.100:12345",
     "Protocol":"unix",
     "InitSendData":""
 }
+```
 Note: This will close all the connections to the remote associated with PID.
 
 /api/destroy-proxy: close all the remote and stop the dynamic proxy listener
 associated with the specific remote address and PID.
+
 POST data:
+```
 {
     "PID":"nsq-12",
     "RemoteAddr":"10.10.1.100:12345",
     "Protocol":"unix",
     "InitSendData":""
 }
+```
 Note: If this dynamic proxy is not used anymore, the client can destroy it using
 this API. Basically, this is not necessary since the proxy can handle this
 situation.
 
 /api/destroy-all: close and stop all the dynamic proxy listener
 associated with the specific PID.
+```
 {
     "PID":"nsq-12",
 }
+```
 
 Note: Destroy all the proxy used by the PID. Basically, this is not necessary since the proxy can handle this
 situation.
@@ -67,6 +78,7 @@ to upgrade the proxy binary without affecting the services.
 
 Configuration for the static proxy
 ================
+```
 [
 {
     "ModuleName":"nsqlookup",
@@ -77,6 +89,7 @@ Configuration for the static proxy
     ]
 }
 ]
+```
 Note: the static proxy configure can be used to start some proxy server
 without calling the dynamic API.
 
@@ -86,6 +99,6 @@ The proxy can be configured in the static configure file.
 Currently only lookup is supported on the nsq.The API is the same without proxy.
 With proxy, all returned nsqd ip:port will be converted to local proxy
 address. If you do need the orig, you can add query param with
-"?disableconvert=true", and the cache is enabled by default. By using
+`"?disableconvert=true"`, and the cache is enabled by default. By using
 "?disablecache=true" you can disable the cache.
 
