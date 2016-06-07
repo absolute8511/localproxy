@@ -8,7 +8,8 @@ See ./server -h for the details.
 
 HTTP API
 ========
-/api/get-proxy-conn: get a dynamic proxy address.
+`/api/get-proxy-conn`
+get a dynamic proxy address.
 
 POST data :
 ```
@@ -25,7 +26,8 @@ Note: PID is used to separate the different client to the same service,
     InitSendData: this can be used to init the connection after the success
     connect. (such as the auth or identify client.)
 
-/api/close-proxy-conn: close the remote immediately.
+`/api/close-proxy-conn` 
+close the remote immediately.
 
 POST data:
 ```
@@ -38,7 +40,8 @@ POST data:
 ```
 Note: This will close all the connections to the remote associated with PID.
 
-/api/destroy-proxy: close all the remote and stop the dynamic proxy listener
+`/api/destroy-proxy` 
+close all the remote and stop the dynamic proxy listener
 associated with the specific remote address and PID.
 
 POST data:
@@ -54,8 +57,10 @@ Note: If this dynamic proxy is not used anymore, the client can destroy it using
 this API. Basically, this is not necessary since the proxy can handle this
 situation.
 
-/api/destroy-all: close and stop all the dynamic proxy listener
+`/api/destroy-all` 
+close and stop all the dynamic proxy listener
 associated with the specific PID.
+
 ```
 {
     "PID":"nsq-12",
@@ -65,9 +70,11 @@ associated with the specific PID.
 Note: Destroy all the proxy used by the PID. Basically, this is not necessary since the proxy can handle this
 situation.
 
-/api/status: see the current status for the proxy connections.
+`/api/status`
+see the current status for the proxy connections.
 
-/api/debug-status: see the current status for the proxy connections and print
+`/api/debug-status` 
+see the current status for the proxy connections and print
 the debug info for details.
 
 
@@ -100,5 +107,5 @@ Currently only lookup is supported on the nsq.The API is the same without proxy.
 With proxy, all returned nsqd ip:port will be converted to local proxy
 address. If you do need the orig, you can add query param with
 `"?disableconvert=true"`, and the cache is enabled by default. By using
-"?disablecache=true" you can disable the cache.
+`"?disablecache=true"` you can disable the cache.
 
